@@ -4,7 +4,6 @@ function processInput() {
     const num3 = parseFloat(document.getElementById('number3').value);
     const num4 = parseFloat(document.getElementById('number4').value);
 
-    // Check if any numbers are NaN
     if (isNaN(num1) || isNaN(num2) || isNaN(num3) || isNaN(num4)) {
         document.getElementById('output').innerHTML = 'Please enter valid numbers.';
         return;
@@ -14,9 +13,17 @@ function processInput() {
     const validExpressions = generateExpressions(numbers);
 
     const outputElement = document.getElementById('output');
-    outputElement.innerHTML = validExpressions.length > 0
-        ? validExpressions.join('<br>')
-        : 'No valid expressions found.';
+    outputElement.innerHTML = '';
+
+    if (validExpressions.length > 0) {
+        validExpressions.forEach(expr => {
+            const p = document.createElement('p');
+            p.textContent = expr;
+            outputElement.appendChild(p);
+        });
+    } else {
+        outputElement.innerHTML = '<p>No valid expressions found.</p>';
+    }
 }
 
 function generateExpressions(numbers) {
@@ -53,8 +60,8 @@ function generateExpressions(numbers) {
                         `${nums[0]} ${op1} ${nums[1]} ${op2} ${nums[2]} ${op3} ${nums[3]}`,
                         `(${nums[0]} ${op1} ${nums[1]}) ${op2} (${nums[2]} ${op3} ${nums[3]})`,
                         `(${nums[0]} ${op1} ${nums[1]} ${op2} ${nums[2]}) ${op3} ${nums[3]}`,
-                        `${nums[0]} ${op1} (${nums[1]} ${op2} (${nums[2]} ${op3} ${nums[3]}))`,
-                        `(${nums[0]} ${op1} ${nums[1]} ${op2} ${nums[2]}) ${op3} ${nums[3]}`
+                        `${nums[0]} ${op1} (${nums[1]} ${op2} ${nums[2]}) ${op3} ${nums[3]}`,
+                        `${nums[0]} ${op1} (${nums[1]} ${op2} (${nums[2]} ${op3} ${nums[3]}))`
                     ];
                     expressions.push(...exprs);
                 }
@@ -67,7 +74,8 @@ function generateExpressions(numbers) {
     for (const nums of numbersPermutations) {
         const expressions = generateAllExpressions(nums);
         for (const expr of expressions) {
-            if (evaluateExpression(expr) === 20) {
+            const result = evaluateExpression(expr);
+            if (result === 20 && !expr.includes('/ 0')) {
                 results.add(expr);
             }
         }
