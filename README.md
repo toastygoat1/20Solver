@@ -14,6 +14,6 @@ Cara penggunaan:
  -Setelah menginput 4 angka, pengguna menekan tombol solve
  -Nanti program akan generate semua ekspresi yang mungkin
 
-Dokumentasi dan Demo Video bisa di akses dalam file github
+Dokumentasi dan Demo Video bisa di akses di github repo
 
 Website 20 Solver : https://toastygoat1.github.io/20Solver/
