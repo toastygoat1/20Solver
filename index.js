@@ -1,19 +1,36 @@
 function processInput() {
-    const num1 = parseFloat(document.getElementById('number1').value);
-    const num2 = parseFloat(document.getElementById('number2').value);
-    const num3 = parseFloat(document.getElementById('number3').value);
-    const num4 = parseFloat(document.getElementById('number4').value);
+    const num1 = document.getElementById('number1').value;
+    const num2 = document.getElementById('number2').value;
+    const num3 = document.getElementById('number3').value;
+    const num4 = document.getElementById('number4').value;
 
-    if (isNaN(num1) || isNaN(num2) || isNaN(num3) || isNaN(num4)) {
-        document.getElementById('output').innerHTML = 'Please enter valid numbers.';
-        return;
+    const invalidMessage = document.getElementById('invalid');
+    const outputElement = document.getElementById('output');
+    const noValid = document.getElementById('noValid');
+
+    noValid.innerHTML = ''; 
+    invalidMessage.style.display = 'none'; 
+    outputElement.innerHTML = '';
+
+    if (num1 === '' || num2 === '' || num3 === '' || num4 === '') {
+        invalidMessage.innerHTML = 'Please enter valid numbers.';
+        invalidMessage.style.display = 'block'; 
+        return; 
     }
 
-    const numbers = [num1, num2, num3, num4];
-    const validExpressions = generateExpressions(numbers);
+    const parsedNum1 = parseFloat(num1);
+    const parsedNum2 = parseFloat(num2);
+    const parsedNum3 = parseFloat(num3);
+    const parsedNum4 = parseFloat(num4);
 
-    const outputElement = document.getElementById('output');
-    outputElement.innerHTML = '';
+    if (isNaN(parsedNum1) || isNaN(parsedNum2) || isNaN(parsedNum3) || isNaN(parsedNum4)) {
+        invalidMessage.innerHTML = 'Please enter valid numbers.';
+        invalidMessage.style.display = 'block'; 
+        return; 
+    }
+
+    const numbers = [parsedNum1, parsedNum2, parsedNum3, parsedNum4];
+    const validExpressions = generateExpressions(numbers);
 
     if (validExpressions.length > 0) {
         validExpressions.forEach(expr => {
@@ -22,9 +39,11 @@ function processInput() {
             outputElement.appendChild(p);
         });
     } else {
-        outputElement.innerHTML = '<p>No valid expressions found.</p>';
+        noValid.innerHTML = 'No valid expressions found';
     }
 }
+
+
 
 function generateExpressions(numbers) {
     const operators = ['+', '-', '*', '/'];

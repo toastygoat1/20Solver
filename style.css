@@ -4,11 +4,15 @@
 }
 
 body {
-  padding-top: 24px;
+  padding-top: 100px;
   background-color: #333438;
   margin: auto;
   max-width: 1000px;
   text-align: center;
+}
+
+.H1{
+  font-size: 70px;
 }
 
 .form-wrapper {
@@ -16,6 +20,7 @@ body {
 }
 
 .input-wrapper {
+  margin-top: 50px;
   display: flex;
   justify-content: center;
   gap: 36px;
@@ -23,7 +28,7 @@ body {
 }
 
 .number-input {
-  width: 15%;
+  width: 10%;
   padding-bottom: 12px;
   font-size: 48px;
   text-align: center;
@@ -45,16 +50,23 @@ input[type='number'] {
 }
 
 .button {
-  margin-top: 20px;
+  margin-top: 60px;
   background-color: transparent;
   font-size: 16px;
   padding: 8px 24px;
   border-radius: 8px;
   border: 1px solid #d1d0c5;
   cursor: pointer;
+  transition: 0.5s;
 }
 
+.button:hover{
+  background-color:#64645e ;
+}
 
+.invalid{
+  color : #d1d0c5;
+}
 #output {
   margin-top: 20px;
   display: grid;
