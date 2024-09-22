@@ -1,8 +1,8 @@
 function processInput() {
-    const num1 = document.getElementById('number1').value;
-    const num2 = document.getElementById('number2').value;
-    const num3 = document.getElementById('number3').value;
-    const num4 = document.getElementById('number4').value;
+    const num1 = parseFloat(document.getElementById('number1').value);
+    const num2 = parseFloat(document.getElementById('number2').value);
+    const num3 = parseFloat(document.getElementById('number3').value);
+    const num4 = parseFloat(document.getElementById('number4').value);
 
     const invalidMessage = document.getElementById('invalid');
     const outputElement = document.getElementById('output');
@@ -18,18 +18,13 @@ function processInput() {
         return; 
     }
 
-    const parsedNum1 = parseFloat(num1);
-    const parsedNum2 = parseFloat(num2);
-    const parsedNum3 = parseFloat(num3);
-    const parsedNum4 = parseFloat(num4);
-
-    if (isNaN(parsedNum1) || isNaN(parsedNum2) || isNaN(parsedNum3) || isNaN(parsedNum4)) {
+    if (isNaN(num1) || isNaN(num2) || isNaN(num3) || isNaN(num4)) {
         invalidMessage.innerHTML = 'Please enter valid numbers.';
         invalidMessage.style.display = 'block'; 
         return; 
     }
 
-    const numbers = [parsedNum1, parsedNum2, parsedNum3, parsedNum4];
+    const numbers = [num1, num2, num3, num4];
     const validExpressions = generateExpressions(numbers);
 
     if (validExpressions.length > 0) {
